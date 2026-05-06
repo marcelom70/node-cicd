@@ -40,7 +40,6 @@ jobs:
         run: |
           echo "Start Deploying to EC2 instance"
           mkdir -p ~/.ssh
-          ping -c 2 18.230.115.167 || true
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/key.pem
           chmod 600 ~/.ssh/key.pem
 
