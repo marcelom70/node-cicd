@@ -36,6 +36,9 @@ jobs:
           ping -c 2 ${{ secrets.EC2_HOST }} || true
           nc -zv ${{ secrets.EC2_HOST }} 22 || true
 
+      - name: Show runner IP
+        run: curl ifconfig.me
+
       - name: Deploy via SSH (simple)
         run: |
           echo "Start Deploying to EC2 instance"
