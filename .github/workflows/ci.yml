@@ -34,9 +34,14 @@ jobs:
 
       - name: Deploy via SSH (simple)
         run: |
+          echo "Start Deploying to EC2 instance"
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/key.pem
           chmod 600 ~/.ssh/key.pem
+
+          echo "Deploying to EC2 instance 1..."
+          cat /etc/os-release
+          echo "Deploying to EC2 instance 2..."
 
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             docker pull marcelom70/node-cicd:latest
