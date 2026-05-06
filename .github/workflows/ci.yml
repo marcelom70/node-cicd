@@ -31,11 +31,16 @@ jobs:
       #       docker stop node-cicd || true
       #       docker rm node-cicd || true
       #       docker run -d -p 5000:5000 --name node-cicd marcelom70/node-cicd:latest
+      - name: Test connectivity
+        run: |
+          ping -c 2 ${{ secrets.EC2_HOST }} || true
+          nc -zv ${{ secrets.EC2_HOST }} 22 || true
 
       - name: Deploy via SSH (simple)
         run: |
           echo "Start Deploying to EC2 instance"
           mkdir -p ~/.ssh
+          ping -c 2 18.230.115.167 || true
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/key.pem
           chmod 600 ~/.ssh/key.pem
 
